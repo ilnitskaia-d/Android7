@@ -1,64 +1,57 @@
 package com.example.android7.ui.main
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.android7.databinding.ItemCameraBinding
-import com.example.android7.databinding.SectionHeaderBinding
 
 
-class RVAdapter: ListAdapter<CameraItem, RVAdapter.ItemViewHolder>(ItemDiffUtil()) {
+class RVAdapter: ListAdapter<Item, RVAdapter.ItemViewHolder>(ItemDiffUtil()) {
 
-    private val list: ArrayList<CameraItem> = arrayListOf()
-    val VIEW_TYPE_HEADER = 0
-    val VIEW_TYPE_ITEM = 1
+    private val list: ArrayList<Item> = arrayListOf()
+    val VIEW_TYPE_HEADER = "header"
+    val VIEW_TYPE_ITEM = "item"
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return if (viewType == VIEW_TYPE_ITEM) {
-            ItemViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        return ItemViewHolder(
                 ItemCameraBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
-        } else {
-            SectionHeaderViewHolder(SectionHeaderBinding.inflate(LayoutInflater.from(parent.context),parent, false))
-        }
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        when(holder.itemViewType) {
-            VIEW_TYPE_ITEM -> {
-                val h = holder as ItemViewHolder
-                h.bind(list[position])
-            }
-
-            VIEW_TYPE_HEADER -> {
-                val h = holder as SectionHeaderViewHolder
-                h.binding
-            }
-        }
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        holder.bind(list[position])
     }
 
     inner class ItemViewHolder(private val binding: ItemCameraBinding):ViewHolder(binding.root) {
-        fun bind(camera: CameraItem) {
+        fun bind(camera: Item) {
             binding.tvCamera.text = camera.name
+            when (camera.type) {
+                VIEW_TYPE_HEADER -> {
+                    binding.ivCamera.visibility = View.GONE
+                }
+                VIEW_TYPE_ITEM -> {
+                    binding.ivCamera.visibility = View.VISIBLE
+                }
+            }
         }
     }
 
-    inner class SectionHeaderViewHolder(private val binding: SectionHeaderBinding):ViewHolder(binding.root)
+    class ItemDiffUtil: DiffUtil.ItemCallback<Item>() {
+        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean = oldItem.name == newItem.name
 
-    class ItemDiffUtil: DiffUtil.ItemCallback<CameraItem>() {
-        override fun areItemsTheSame(oldItem: CameraItem, newItem: CameraItem): Boolean = oldItem.name == newItem.name
-
-        override fun areContentsTheSame(oldItem: CameraItem, newItem: CameraItem): Boolean = oldItem == newItem
+        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean = oldItem == newItem
 
     }
 }

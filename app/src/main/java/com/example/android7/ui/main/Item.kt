@@ -1,6 +1,7 @@
 package com.example.android7.ui.main
 
-data class CameraItem(
+data class Item(
+    val type: String,
     val name: String,
-    val img: String
+    val img: String,
 )

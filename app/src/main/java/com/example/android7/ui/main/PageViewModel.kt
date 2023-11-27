@@ -13,6 +13,22 @@ class PageViewModel : ViewModel() {
         "Hello world from section: $it"
     }
 
+    val list: LiveData<List<Item>> = _index.map {
+        if(it == 0) {
+            listOf(
+                Item("header", "Гостинная", ""),
+                Item("item", "Камера 1", ""),
+                Item("item", "Камера 2", ""),
+                Item("header", "Спальня", ""),
+                Item("item", "Камера 3", ""),
+                Item("item", "Камера 4", ""),
+                Item("item", "Камера 5", ""),
+            )
+        } else {
+            listOf()
+        }
+    }
+
     fun setIndex(index: Int) {
         _index.value = index
     }
