@@ -1,24 +1,20 @@
 package com.example.android7.ui.main
 
+import android.opengl.Visibility
 import android.view.LayoutInflater
-import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView.Adapter
+import androidx.recyclerview.widget.RecyclerView.VISIBLE
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.android7.databinding.ItemCameraBinding
+import com.example.android7.databinding.ItemLayoutBinding
 
 
-class RVAdapter: ListAdapter<Item, RVAdapter.ItemViewHolder>(ItemDiffUtil()) {
-
-    private val list: ArrayList<Item> = arrayListOf()
-    val VIEW_TYPE_HEADER = "header"
-    val VIEW_TYPE_ITEM = "item"
+class RVAdapter(private val list: List<Item>): Adapter<RVAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder(
-                ItemCameraBinding.inflate(
+                ItemLayoutBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -34,24 +30,16 @@ class RVAdapter: ListAdapter<Item, RVAdapter.ItemViewHolder>(ItemDiffUtil()) {
         holder.bind(list[position])
     }
 
-    inner class ItemViewHolder(private val binding: ItemCameraBinding):ViewHolder(binding.root) {
-        fun bind(camera: Item) {
-            binding.tvCamera.text = camera.name
-            when (camera.type) {
-                VIEW_TYPE_HEADER -> {
-                    binding.ivCamera.visibility = View.GONE
+    inner class ItemViewHolder(private val binding: ItemLayoutBinding):ViewHolder(binding.root) {
+        fun bind(item: Item) {
+            binding.apply {
+                tvCamera.text = item.name
+                if(item.type == "header") {
+                    ivCamera.visibility = GONE
+                    cv.cardElevation = .0f
                 }
-                VIEW_TYPE_ITEM -> {
-                    binding.ivCamera.visibility = View.VISIBLE
-                }
+
             }
         }
-    }
-
-    class ItemDiffUtil: DiffUtil.ItemCallback<Item>() {
-        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean = oldItem.name == newItem.name
-
-        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean = oldItem == newItem
-
     }
 }
