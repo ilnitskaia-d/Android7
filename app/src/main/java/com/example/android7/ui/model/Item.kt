@@ -1,4 +1,4 @@
-package com.example.android7.ui.main
+package com.example.android7.ui.model
 
 data class Item(
     val type: String,

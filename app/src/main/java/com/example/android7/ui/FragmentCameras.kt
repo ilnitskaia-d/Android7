@@ -1,4 +1,4 @@
-package com.example.android7
+package com.example.android7.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android7.databinding.FragmentCamerasBinding
-import com.example.android7.ui.main.Item
-import com.example.android7.ui.main.PageViewModel
-import com.example.android7.ui.main.RVAdapter
+import com.example.android7.ui.model.Item
+import com.example.android7.ui.adapter.RVAdapter
 
 class FragmentCameras : Fragment() {
     lateinit var binding: FragmentCamerasBinding
@@ -24,7 +23,6 @@ class FragmentCameras : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val pageViewModel =  PageViewModel()
         val rvAdapter = RVAdapter(
             listOf(
                 Item("header", "Гостинная", ""),

@@ -1,13 +1,12 @@
-package com.example.android7.ui.main
+package com.example.android7.ui.adapter
 
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.VISIBLE
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.android7.databinding.ItemLayoutBinding
+import com.example.android7.ui.model.Item
 
 
 class RVAdapter(private val list: List<Item>): Adapter<RVAdapter.ItemViewHolder>() {

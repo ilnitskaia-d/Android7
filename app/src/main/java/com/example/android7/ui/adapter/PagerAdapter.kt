@@ -1,21 +1,16 @@
-package com.example.android7.ui.main
+package com.example.android7.ui.adapter
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.android7.FragmentCameras
-import com.example.android7.FragmentDoors
+import com.example.android7.ui.FragmentCameras
+import com.example.android7.ui.FragmentDoors
 
 private val TAB_TITLES = arrayOf(
     "Двери",
     "Камеры"
 )
-
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 class PagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
@@ -42,7 +37,6 @@ class PagerAdapter(private val context: Context, fm: FragmentManager) :
     }
 
     override fun getCount(): Int {
-        // Show 2 total pages.
         return TAB_TITLES.size
     }
 }
