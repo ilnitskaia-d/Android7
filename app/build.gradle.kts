@@ -67,4 +67,13 @@ dependencies {
     //DaggerHilt
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-compiler:2.44")
+
+    //LiveData
+    val lifecycle_version = "2.6.2"
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-runtime:$lifecycle_version")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+
+    implementation("androidx.room:room-coroutines:2.1.0-alpha04")
 }

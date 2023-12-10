@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.android7.data.database.ItemDatabase
 import com.example.android7.data.database.dao.ItemDao
+import com.example.android7.data.database.repositories.ItemRepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,4 +24,8 @@ class AppModule {
     @Provides
     fun provideItemDao(database: ItemDatabase) =
         database.getDao()
+
+    @Provides
+    fun provideBookRepository(dao: ItemDao) =
+        ItemRepositoryImp(dao)
 }
