@@ -1,4 +1,4 @@
-package com.example.android7
+package com.example.android7.ui
 
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout

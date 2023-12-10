@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.android7.databinding.ItemLayoutBinding
-import com.example.android7.ui.model.Item
+import com.example.android7.data.database.model.Item
 
 
 class RVAdapter(private val list: List<Item>): Adapter<RVAdapter.ItemViewHolder>() {

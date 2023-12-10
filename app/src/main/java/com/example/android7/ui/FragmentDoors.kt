@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android7.R
 import com.example.android7.databinding.FragmentDoorsBinding
 import com.example.android7.ui.adapter.RVAdapter
-import com.example.android7.ui.model.Item
+import com.example.android7.data.database.model.Item
 
 class FragmentDoors : Fragment() {
     private lateinit var binding: FragmentDoorsBinding
