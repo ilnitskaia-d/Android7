@@ -7,11 +7,13 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.android7.data.database.model.Item
+import com.example.android7.domain.model.ItemModel
+import com.example.android7.domain.utils.Resource
 
 @Dao
 interface ItemDao {
 
-    @Query("Select * From item")
+    @Query("SELECT * FROM 'item-table' ")
     suspend fun getAllItems(): List<Item>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
