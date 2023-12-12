@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.example.android7.data.database.ItemDatabase
 import com.example.android7.data.database.dao.ItemDao
 import com.example.android7.data.database.repositories.ItemRepositoryImp
+import com.example.android7.domain.repositories.ItemRepository
+import com.example.android7.domain.usecase.GetAllItemsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +16,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
+object AppModule {
 
     @Provides
     @Singleton
@@ -26,6 +28,10 @@ class AppModule {
         database.getDao()
 
     @Provides
-    fun provideBookRepository(dao: ItemDao) =
+    fun provideItemRepository(dao: ItemDao) =
         ItemRepositoryImp(dao)
+
+    @Provides
+    fun provideGetAllItemsUseCase(repository: ItemRepository) =
+        GetAllItemsUseCase(repository)
 }
